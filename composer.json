@@ -1,0 +1,23 @@
+{
+  "name": "ivy/ivy-maintenance-journal",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "description": "아이비넷 유지보수 플러그인",
+  "authors": [
+    {
+      "name": "Changwoo Nam",
+      "email": "changwoo@ivynet.co.kr"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ivy\\Maint\\": "src/"
+    },
+    "files": [
+      "src/Functions/Idioms.php",
+      "src/Functions/Startup.php"
+    ]
+  },
+  "require": {
+  }
+}
