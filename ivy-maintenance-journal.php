@@ -6,7 +6,7 @@
  * Author:              Changwoo Nam
  * Author URI:          mailto://changwoo@ivynet.co.kr
  * License:             GPLv2 or later
- * Version:             0.0.0
+ * Version:             0.0.2
  */
 
 /**
@@ -15,7 +15,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 define('IMJ_MAIN', __FILE__);
-define('IMJ_VERSION', '0.0.0');
+define('IMJ_VERSION', '0.0.2');
 
 try {
     $launcher = \Ivy\Maint\Functions\initLauncher(IMJ_MAIN, IMJ_VERSION);
