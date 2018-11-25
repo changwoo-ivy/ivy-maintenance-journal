@@ -89,35 +89,37 @@ class IssueModel extends CustomPostModel
     public static function getCapabilityArray()
     {
         return [
-            'edit_post'          => self::getCapEditPost(),
-            'read_post'          => self::getCapReadPost(),
-            'delete_post'        => self::getCapDeletePost(),
-            'edit_posts'         => self::getCapEditPosts(),
-            'edit_others_posts'  => self::getCapEditOthersPosts(),
-            'publish_posts'      => self::getCapPublishPosts(),
-            'read_private_posts' => self::getCapReadPrivatePosts(),
-            'create_posts'       => self::getCapCreatePosts(),
+            'delete_others_posts'    => self::getCapDeleteOthersPosts(),
+            'delete_posts'           => self::getCapDeletePosts(),
+            'delete_private_posts'   => self::getCapDeletePrivatePosts(),
+            'delete_published_posts' => self::getCapDeletePublishedPosts(),
+            'edit_others_posts'      => self::getCapEditOthersPosts(),
+            'edit_posts'             => self::getCapEditPosts(),
+            'edit_private_posts'     => self::getCapEditPrivatePosts(),
+            'edit_published_posts'   => self::getCapEditPublishedPosts(),
+            'publish_posts'          => self::getCapPublishPosts(),
+            'read_private_posts'     => self::getCapReadPrivatePosts(),
         ];
     }
 
-    public static function getCapEditPost()
+    public static function getCapDeleteOthersPosts()
     {
-        return 'edit_issue';
+        return 'delete_others_issues';
     }
 
-    public static function getCapReadPost()
+    public static function getCapDeletePosts()
     {
-        return 'read_issue';
+        return 'delete_issues';
     }
 
-    public static function getCapDeletePost()
+    public static function getCapDeletePrivatePosts()
     {
-        return 'delete_issue';
+        return 'delete_private_issues';
     }
 
-    public static function getCapEditPosts()
+    public static function getCapDeletePublishedPosts()
     {
-        return 'edit_issues';
+        return 'delete_published_issues';
     }
 
     public static function getCapEditOthersPosts()
@@ -125,18 +127,33 @@ class IssueModel extends CustomPostModel
         return 'edit_others_issues';
     }
 
+    public static function getCapEditPosts()
+    {
+        return 'edit_issues';
+    }
+
+    public static function getCapEditPrivatePosts()
+    {
+        return 'edit_private_issues';
+    }
+
+    public static function getCapDeletePost()
+    {
+        return 'delete_project';
+    }
+
+    public static function getCapEditPublishedPosts()
+    {
+        return 'edit_published_issues';
+    }
+
     public static function getCapPublishPosts()
     {
-        return 'publish_issues';
+        return 'edit_publish_issues';
     }
 
     public static function getCapReadPrivatePosts()
     {
         return 'read_private_issues';
-    }
-
-    public static function getCapCreatePosts()
-    {
-        return 'create_issues';
     }
 }
