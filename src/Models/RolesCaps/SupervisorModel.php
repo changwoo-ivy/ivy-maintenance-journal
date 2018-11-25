@@ -27,6 +27,9 @@ class SupervisorModel extends BaseRolesCapsModel
         $milestoneCaps = array_values(MilestoneModel::getCapabilityArray());
 
         return array_merge(
+            [
+                'read' => true
+            ],
             array_combine($projectCaps, array_pad([], count($projectCaps), true)),
             array_combine($issueCaps, array_pad([], count($issueCaps), true)),
             array_combine($milestoneCaps, array_pad([], count($milestoneCaps), true))
