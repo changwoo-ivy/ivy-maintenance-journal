@@ -2,7 +2,6 @@
 
 namespace Ivy\Maint\Initiators;
 
-use Ivy\Maint\Models\RolesCaps\IssueAgentModel;
 use Ivy\Maint\Models\RolesCaps\ProjectManagerModel;
 use Ivy\Maint\Models\RolesCaps\SupervisorModel;
 use Ivy\Mu\Initiators\AutoHookInitiator;
@@ -24,8 +23,6 @@ class RolesCapsInitiator extends AutoHookInitiator
             $meta["{$wpdb->prefix}user_level"] = 7;
         } elseif ($userLevel < 6 && $user->has_cap(ProjectManagerModel::getRoleName())) {
             $meta["{$wpdb->prefix}user_level"] = 6;
-        } elseif ($userLevel < 5 && $user->has_cap(IssueAgentModel::getRoleName())) {
-            $meta["{$wpdb->prefix}user_level"] = 5;
         }
 
         return $meta;
