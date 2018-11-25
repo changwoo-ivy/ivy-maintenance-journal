@@ -54,24 +54,37 @@ class DashboardView extends BaseView
     private function prepareScripts()
     {
         wp_enqueue_style(
+            prefixed('bootstrap', 1),
+            $this->getAssetsUrl('externals', 'bootstrap-4.1.3/css/bootstrap.css', false),
+            [],
+            '4.1.3'
+        );
+
+        wp_enqueue_style(
+            prefixed('font-awesome', 1),
+            $this->getAssetsUrl('externals', 'font-awesome-4.7.0/css/font-awesome.css', false),
+            [],
+            '4.7.0'
+        );
+
+        wp_enqueue_style(
+            prefixed('themefy-icons', 1),
+            $this->getAssetsUrl('externals', 'themify-icons/themify-icons.css', false),
+            [],
+            '4.7.0'
+        );
+
+        wp_enqueue_style(
             prefixed('style', 1),
             $this->getCssUrl('front/dashboard/style.css'),
             [],
-            '1.0.0' // adminator's version
+            $this->getLauncher()->getVersion()
         );
 
         $this->enqueueJs(
-            prefixed('vendor', 1),
-            'front/dashboard/vendor.js',
+            prefixed('sidebar', 1),
+            'front/dashboard/sidebar.js',
             [],
-            '1.0.0',
-            true
-        );
-
-        $this->enqueueJs(
-            prefixed('bundle', 1),
-            'front/dashboard/bundle.js',
-            [prefixed('vendor', 1)],
             '1.0.0',
             true
         );
