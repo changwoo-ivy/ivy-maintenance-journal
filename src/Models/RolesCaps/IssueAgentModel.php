@@ -2,6 +2,7 @@
 
 namespace Ivy\Maint\Models\RolesCaps;
 
+use Ivy\Maint\Models\CustomPosts\IssueModel;
 use Ivy\Mu\Models\BaseRolesCapsModel;
 use function Ivy\Maint\Functions\prefixed;
 
@@ -29,8 +30,14 @@ class IssueAgentModel extends BaseRolesCapsModel
         return '이슈 에이전트';
     }
 
-//    public function getCapabilities()
-//    {
-//        // TODO: 이슈 에이전트에게 적절한 프로젝트와 이슈 권한 부여
-//    }
+    public function getCapabilities()
+    {
+        return [
+            'read' => true,
+
+            IssueModel::getCapEditPosts()          => true,
+            IssueModel::getCapEditOthersPosts()    => true,
+            IssueModel::getCapEditPublishedPosts() => true,
+        ];
+    }
 }
