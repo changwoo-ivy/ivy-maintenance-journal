@@ -35,27 +35,25 @@ class ProjectManagerModel extends BaseRolesCapsModel
 
     public function getCapabilities()
     {
-        $projectCaps   = [
-            ProjectModel::getCapEditPosts(),
-            ProjectModel::getCapEditPublishedPosts(),
-            ProjectModel::getCapEditPrivatePosts(),
-            ProjectModel::getCapPublishPosts(),
-            ProjectModel::getCapReadPrivatePosts(),
-        ];
-        $issueCaps     = IssueModel::getCapabilityArray();
-        $milestoneCaps = [
-            MilestoneModel::getCapEditTerms(),
-            MilestoneModel::getCapAssignTerms(),
-            MilestoneModel::getCapDeleteTerms(),
-        ];
+        $issueCaps = IssueModel::getCapabilityArray();
 
         return array_merge(
             [
-                'read' => true,
+                'read'                                   => true,
+
+                // projects
+                ProjectModel::getCapEditPosts()          => true,
+                ProjectModel::getCapEditPublishedPosts() => true,
+                ProjectModel::getCapEditPrivatePosts()   => true,
+                ProjectModel::getCapPublishPosts()       => true,
+                ProjectModel::getCapReadPrivatePosts()   => true,
+
+                // milestones
+                MilestoneModel::getCapEditTerms()        => true,
+                MilestoneModel::getCapAssignTerms()      => true,
+                MilestoneModel::getCapDeleteTerms()      => true,
             ],
-            array_combine($projectCaps, array_pad([], count($projectCaps), true)),
-            array_combine(array_values($issueCaps), array_pad([], count($issueCaps), true)),
-            array_combine($milestoneCaps, array_pad([], count($milestoneCaps), true))
+            array_combine(array_values($issueCaps), array_pad([], count($issueCaps), true))
         );
     }
 }
