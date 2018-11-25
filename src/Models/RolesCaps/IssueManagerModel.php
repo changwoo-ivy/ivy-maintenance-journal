@@ -6,27 +6,27 @@ use Ivy\Mu\Models\BaseRolesCapsModel;
 use function Ivy\Maint\Functions\prefixed;
 
 /**
- * Class IssueAgentModel
+ * Class IssueManagerModel
  *
- * 프로젝트 이슈 담당자 역할
+ * 이슈 매니저 역할
  *
- * 배정된 프로젝트, 배정된 이슈에만 접근 가능.
- * 이슈에 대해 코멘트 지정, 일부 속성만 편집 가능.
+ * 수퍼바이저/프로젝트 매니저에 의해 프로젝트에 배정됨.
+ * 담당 프로젝트 하에서 자유롭게 이슈 처리 가능.
  *
  * @package Ivy\Maint\Models\RolesCaps
  */
-class IssueAgentModel extends BaseRolesCapsModel
+class IssueManagerModel extends BaseRolesCapsModel
 {
     protected $assignToAdmin = false;
 
     public static function getRoleName()
     {
-        return prefixed('issue_agent');
+        return prefixed('issue_manager');
     }
 
     public static function getDisplayName()
     {
-        return '이슈 에이전트';
+        return '이슈 매니저';
     }
 
 //    public function getCapabilities()
