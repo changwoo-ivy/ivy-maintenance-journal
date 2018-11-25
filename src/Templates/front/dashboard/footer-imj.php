@@ -7,7 +7,7 @@ if (!isset($footer_func)) {
     $footer_func = null;
 }
 ?>
-</div> <!-- .full-container -->
+</div> <!-- .full-container or .container-fluid -->
 </div> <!-- #mainContent -->
 </main>
 
