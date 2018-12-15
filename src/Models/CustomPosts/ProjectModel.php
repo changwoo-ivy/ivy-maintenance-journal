@@ -2,7 +2,10 @@
 
 namespace Ivy\Maint\Models\CustomPosts;
 
+use Ivy\Maint\Models\ValueObjects\BillableHour;
 use Ivy\Mu\Models\CustomPostModel;
+use Ivy\Mu\Models\ValueTypes\DatetimeType;
+use Ivy\Mu\Models\ValueTypes\ValueObjectValueType;
 use function Ivy\Maint\Functions\prefixed;
 
 class ProjectModel extends CustomPostModel
@@ -16,7 +19,7 @@ class ProjectModel extends CustomPostModel
     {
         return [
             'label'                 => '프로젝트',
-            'labels'              => [
+            'labels'                => [
                 'name'                  => '프로젝트들',
                 'singular_name'         => '프로젝트',
                 'add_new'               => '새로 추가',
@@ -43,21 +46,21 @@ class ProjectModel extends CustomPostModel
                 'items_list'            => '프로젝트 목록',
                 'name_admin_bar'        => '프로젝트',
             ],
-            'description'         => '프로젝트 정보를 기록하는 커스텀 포스트입니다.',
-            'public'              => false,
-            'exclude_from_search' => true,
-            'publicly_queryable'  => false,
-            'show_ui'             => true,
-            'show_in_nav_menus'   => false,
-            'show_in_menu'        => true,
-            'show_in_admin_bar'   => true,
-            'menu_position'       => 23,
-            'menu_icon'           => 'dashicons-portfolio',
-            'capability_type'     => ['project', 'projects'],
-            'capabilities'        => static::getCapabilityArray(),
-            'map_meta_cap'        => true,
-            'hierarchical'        => false,
-            'supports'              => ['title', 'editor', 'author', 'thumbnail', 'excerpt'],
+            'description'           => '프로젝트 정보를 기록하는 커스텀 포스트입니다.',
+            'public'                => false,
+            'exclude_from_search'   => true,
+            'publicly_queryable'    => false,
+            'show_ui'               => true,
+            'show_in_nav_menus'     => false,
+            'show_in_menu'          => true,
+            'show_in_admin_bar'     => true,
+            'menu_position'         => 23,
+            'menu_icon'             => 'dashicons-portfolio',
+            'capability_type'       => ['project', 'projects'],
+            'capabilities'          => static::getCapabilityArray(),
+            'map_meta_cap'          => true,
+            'hierarchical'          => false,
+            'supports'              => ['title', 'editor', 'thumbnail'],
             'register_meta_box_cb'  => null,
             'taxonomies'            => [],
             'has_archive'           => false,
@@ -74,8 +77,64 @@ class ProjectModel extends CustomPostModel
             'delete_with_user'      => false,
             'show_in_rest'          => true,
             'rest_base'             => prefixed('project'),
-            'rest_controller_class' => 'WP_REST_Posts_Controller'
+            'rest_controller_class' => 'WP_REST_Posts_Controller',
         ];
+    }
+
+    public function getFieldStartDate()
+    {
+        return $this->getMetaFieldModel(
+            prefixed('start_date'),
+            [
+                'label'      => '프로젝트 시작일',
+                'shortLabel' => '시작',
+                'valueType'  => new DatetimeType(),
+            ]
+        );
+    }
+
+    public function getFieldEndDate()
+    {
+        return $this->getMetaFieldModel(
+            prefixed('end_date'),
+            [
+                'label'      => '프로젝트 종료일',
+                'shortLabel' => '종료',
+                'valueType'  => new DatetimeType(),
+            ]
+        );
+    }
+
+    public function getFieldBillableHour()
+    {
+        return $this->getMetaFieldModel(
+            prefixed('billable_hour'),
+            [
+                'label'      => '청구 시간 설정',
+                'shortLabel' => 'BH',
+                'valueType'  => new ValueObjectValueType(BillableHour::class),
+            ]
+        );
+    }
+
+    public function getMilestones()
+    {
+    }
+
+    public function getIssues()
+    {
+    }
+
+    public function getProjectManagers()
+    {
+    }
+
+    public function getIssueManagers()
+    {
+    }
+
+    public function getIssueAgents()
+    {
     }
 
     public function activationSetup()
