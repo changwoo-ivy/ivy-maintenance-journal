@@ -11,7 +11,7 @@ use Ivy\Mu\Launchers\AutoDiscoverLauncher;
 function checkEnvironment()
 {
     $requiredPhpVersion = '7.0';
-    $requiredMuVersion  = '0.6.5';
+    $requiredMuVersion  = '0.6.10';
 
     if (!version_compare(phpversion(), $requiredPhpVersion, '>=') &&
         version_compare(IVY_MU_VERSION, $requiredMuVersion, '>=')) {
