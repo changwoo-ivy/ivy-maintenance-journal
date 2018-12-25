@@ -1,3 +1,11 @@
+0.0.5
+=====
+Freeze Date: 2018년 12월 25일
+
+* Billable Hour 기본 기술 등급 리팩터링 (cb858dac)
+* 최소 Ivy-MU 버전 상향 (e9f0ad4f)
+
+
 0.0.4
 =====
 Freeze Date: 2018년 12월 20일
