@@ -2,9 +2,9 @@
 
 namespace Ivy\Maint\Models\ValueObjects;
 
-use Ivy\Mu\Interfaces\Models\ValueObjectInterface;
+use Ivy\Mu\Models\ValueObjects\BaseValueObject;
 
-class SkillValueObject implements ValueObjectInterface
+class SkillValueObject extends BaseValueObject
 {
     /** @var string skill's slug */
     private $slug = '';
@@ -14,26 +14,6 @@ class SkillValueObject implements ValueObjectInterface
 
     /** @var int skills price per hour */
     private $price = 0;
-
-    public static function fromArray($array)
-    {
-        $instance = new static();
-
-        $instance->setSlug(muFromAssoc($array, 'slug'));
-        $instance->setName(muFromAssoc($array, 'name'));
-        $instance->setPrice(muFromAssoc($array, 'price'));
-
-        return $instance;
-    }
-
-    public function toArray()
-    {
-        return [
-            'slug'  => $this->getSlug(),
-            'name'  => $this->getName(),
-            'price' => $this->getPrice(),
-        ];
-    }
 
     /**
      * @return string
@@ -81,5 +61,10 @@ class SkillValueObject implements ValueObjectInterface
     public function setPrice($price)
     {
         $this->price = intval($price);
+    }
+
+    public function isValidObject()
+    {
+        return !empty($this->slug) && !empty($this->name) && $this->price >= 0;
     }
 }
