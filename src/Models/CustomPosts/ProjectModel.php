@@ -2,8 +2,10 @@
 
 namespace Ivy\Maint\Models\CustomPosts;
 
-use Ivy\Maint\Models\ValueObjects\BillableHour;
+use Ivy\Maint\Models\SettingsModel;
+use Ivy\Maint\Models\ValueObjects\SkillValueObject;
 use Ivy\Mu\Models\CustomPostModel;
+use Ivy\Mu\Models\ValueTypes\ArrayType;
 use Ivy\Mu\Models\ValueTypes\DatetimeType;
 use Ivy\Mu\Models\ValueTypes\ValueObjectValueType;
 use function Ivy\Maint\Functions\prefixed;
@@ -110,9 +112,17 @@ class ProjectModel extends CustomPostModel
         return $this->getMetaFieldModel(
             prefixed('billable_hour'),
             [
-                'label'      => '청구 시간 설정',
-                'shortLabel' => 'BH',
-                'valueType'  => new ValueObjectValueType(BillableHour::class),
+                'label'       => '청구 시간 설정',
+                'shortLabel'  => 'BH',
+                'description' => '새로운 프로젝트는 유지보수 설정의 기본 기술 등급을 참고하여 만들어집니다',
+                'valueType'   => new ArrayType(
+                    new ValueObjectValueType(SkillValueObject::class),
+                    ['preserveKeys' => false]
+                ),
+                'default'     => function ($model) {
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    return $model->queryModel(SettingsModel::class)->getFieldSkillLevels()->retrieve();
+                },
             ]
         );
     }

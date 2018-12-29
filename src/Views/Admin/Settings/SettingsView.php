@@ -4,8 +4,8 @@ namespace Ivy\Maint\Views\Admin\Settings;
 
 use Ivy\Maint\Models\SettingsModel;
 use Ivy\Maint\Views\Admin\SettingsSubMenuPageView;
-use Ivy\Mu\Views\Admin\FieldWidgets\RepeatableWidget;
 use Ivy\Mu\Views\Admin\SettingView;
+use function Ivy\Maint\Functions\getSkillLevelAdminFieldWidget;
 
 /**
  * Class SettingsView
@@ -26,23 +26,8 @@ class SettingsView extends SettingView
         $this->addSection('bh', 'Billable Hour (B/H)');
 
         $this->addField(
-            'bh',
-            'skill_levels',
-            new RepeatableWidget(
-                $this->getModel()->getFieldSkillLevels(),
-                [
-                    'labels'       => [
-                        'slug'  => '슬러그',
-                        'name'  => '이름',
-                        'price' => '시간당 비용',
-                    ],
-                    'placeholders' => [
-                        'slug'  => '영소문자, 숫자, 하이픈만',
-                        'name'  => '표시되는 이름',
-                        'price' => '원 단위로 기록',
-                    ],
-                ]
-            )
+            'bh', 'skill_levels',
+            getSkillLevelAdminFieldWidget($this->getModel()->getFieldSkillLevels())
         );
     }
 
