@@ -36,7 +36,7 @@ class ProjectResourcePropertyMetabox extends PropertyMetaBoxView
 
     public function getTitle()
     {
-        return '프로젝트 기본 속성';
+        return '프로젝트 리소스 속성';
     }
 
     public function getFieldWidgets($post)
