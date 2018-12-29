@@ -3,7 +3,8 @@
 namespace Ivy\Maint\Initiators\Admin;
 
 use Ivy\Maint\Models\CustomPosts\ProjectModel;
-use Ivy\Maint\Views\Admin\Metaboxes\ProjectPropertyMetaboxView;
+use Ivy\Maint\Views\Admin\Metaboxes\ProjectBasicPropertyMetaboxView;
+use Ivy\Maint\Views\Admin\Metaboxes\ProjectResourcePropertyMetabox;
 use Ivy\Maint\Views\Admin\ProjectAdminView;
 use Ivy\Mu\Initiators\Admin\CustomPostAdminInitiator;
 
@@ -41,8 +42,15 @@ class ProjectAdminInitiator extends CustomPostAdminInitiator
 
     public function actionMetaBoxes($post)
     {
-        /** @var ProjectPropertyMetaboxView $view */
-        $view = $this->queryView(ProjectPropertyMetaboxView::class);
-        $view->addMetaBox();
+        foreach (
+            [
+                ProjectBasicPropertyMetaboxView::class,
+                ProjectResourcePropertyMetabox::class,
+            ]
+            as $metaboxView
+        ) {
+            /** @noinspection PhpUndefinedMethodInspection */
+            $this->queryView($metaboxView)->addMetaBox();
+        }
     }
 }
