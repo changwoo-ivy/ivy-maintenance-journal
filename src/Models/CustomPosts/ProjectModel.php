@@ -7,6 +7,7 @@ use Ivy\Maint\Models\ValueObjects\SkillValueObject;
 use Ivy\Mu\Models\CustomPostModel;
 use Ivy\Mu\Models\ValueTypes\ArrayType;
 use Ivy\Mu\Models\ValueTypes\DatetimeType;
+use Ivy\Mu\Models\ValueTypes\IntType;
 use Ivy\Mu\Models\ValueTypes\ValueObjectValueType;
 use function Ivy\Maint\Functions\prefixed;
 
@@ -135,16 +136,43 @@ class ProjectModel extends CustomPostModel
     {
     }
 
-    public function getProjectManagers()
+    public function getFieldProjectManagers()
     {
+        return $this->getMetaFieldModel(
+            prefixed('project_managers'),
+            [
+                'label'       => '프로젝트 매니저',
+                'shortLabel'  => 'PM',
+                'description' => '프로젝트를 총괄하는 사용자를 선택합니다',
+                'valueType'   => new IntType(),
+            ]
+        );
     }
 
-    public function getIssueManagers()
+    public function getFieldIssueManagers()
     {
+        return $this->getMetaFieldModel(
+            prefixed('issue_managers'),
+            [
+                'label'       => '이슈 매니저',
+                'shortLabel'  => 'IM',
+                'description' => '이슈 매니저를 선택합니다',
+                'valueType'   => new IntType(),
+            ]
+        );
     }
 
-    public function getIssueAgents()
+    public function getFieldIssueAgents()
     {
+        return $this->getMetaFieldModel(
+            prefixed('issue_agents'),
+            [
+                'label'       => '이슈 에이전트',
+                'shortLabel'  => 'IA',
+                'description' => '이슈 에이전트를 선택합니다',
+                'valueType'   => new IntType(),
+            ]
+        );
     }
 
     public function activationSetup()
